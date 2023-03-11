@@ -1,0 +1,7 @@
+Django>=4.1.6,<4.2
+djangorestframework>=3.14.0
+psycopg2>=2.9.5,<2.10
+drf-spectacular>=0.25.1,<0.26
+Pillow>=9.4.0,<9.5
+uwsgi>=2.0.21,<2.1
+django-cors-headers>=3.10.0,<3.20.0
