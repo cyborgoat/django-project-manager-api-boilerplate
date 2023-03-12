@@ -1,10 +1,19 @@
-"""
-Database models.
-"""
+#!/usr/bin/env python
+# -*-coding:utf-8 -*-
+'''
+@File    :   models.py
+@Time    :   2023/03/12
+@Author  :   Junxiao Guo
+@Version :   1.0
+@License :   (C)Copyright 2022-2023, Junxiao Guo
+@Desc    :   Django database models.
+'''
+
 import uuid
 import os
 
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -53,3 +62,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Project(models.Model):
+    """Place to store project information."""
+    manager = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="manager")
+    title = models.CharField(max_length=255, unique=True)
+    description = models.TextField()
+    members = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="members")
+
+    def __str__(self) -> str:
+        return str(self.title)
