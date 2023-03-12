@@ -1,0 +1,16 @@
+---
+name: django-project-management-api-boilerplate-actions
+
+on: [push]
+
+jobs:
+  lint-and-test:
+    name: Test and Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Test and Lint code
+        run: |
+          docker compose run app python manage.py test
+          docker compose run app flake8
